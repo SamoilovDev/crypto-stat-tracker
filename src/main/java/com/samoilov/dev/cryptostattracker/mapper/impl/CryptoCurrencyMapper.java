@@ -31,15 +31,6 @@ public class CryptoCurrencyMapper implements Mapper<CryptoCurrencyEntity, Crypto
     }
 
     @Override
-    public CryptoCurrencyEntity mapToEntity(CryptoCurrencyDto dto) {
-        return CryptoCurrencyEntity.builder()
-                .currencyCode(dto.getCurrencyCode())
-                .currencyName(dto.getCurrencyName())
-                .checkingPeriod(dto.getCheckingPeriod())
-                .build();
-    }
-
-    @Override
     public PaginatedResponseDto<CryptoCurrencyDto> mapToPaginatedDto(Page<CryptoCurrencyEntity> entityPage) {
         return PaginatedResponseDto.<CryptoCurrencyDto>builder()
                 .size(entityPage.getSize())
@@ -50,6 +41,12 @@ public class CryptoCurrencyMapper implements Mapper<CryptoCurrencyEntity, Crypto
                         .map(this::mapToDto)
                         .toList())
                 .build();
+    }
+
+    @Override
+    @Deprecated
+    public CryptoCurrencyEntity mapToEntity(CryptoCurrencyDto dto) {
+        return null;
     }
 
 }

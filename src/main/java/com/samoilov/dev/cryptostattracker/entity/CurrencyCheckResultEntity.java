@@ -14,10 +14,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -26,6 +26,7 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder(toBuilder = true)
 @Table(name = "currency_check_results", indexes = {
         @Index(name = "pk_currency_check_results_check_result_id", columnList = "check_result_id"),
         @Index(name = "idx_currency_check_results_check_time", columnList = "check_time")
@@ -44,7 +45,6 @@ public class CurrencyCheckResultEntity implements BaseEntity {
     @Column(name = "currency_price", nullable = false, updatable = false)
     private Double currencyPrice;
 
-    @CreationTimestamp
     @Column(name = "check_time", nullable = false, updatable = false)
     private LocalDateTime checkTime;
 
