@@ -15,8 +15,9 @@
     <version>1.0.0</version>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>17</java.version>
         <springdoc.version>2.6.0</springdoc.version>
+        <maven.compiler.plugin>3.11.0</maven.compiler.plugin>
     </properties>
 
     <dependencies>
@@ -88,6 +89,14 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin}</version>
+                <configuration>
+                    <release>${java.version}</release>
                 </configuration>
             </plugin>
         </plugins>

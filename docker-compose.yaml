@@ -13,6 +13,17 @@ services:
     ports:
       - "5432:5432"
     restart: unless-stopped
+  crypto-stat-tracker:
+    build:
+      context: .
+    environment:
+      - POSTGRE_HOSTNAME=db
+      - POSTGRE_PORT=5432
+      - DB=currency_tracker_db
+      - DB_USERNAME=user
+      - DB_PASSWORD=pass
+    depends_on:
+      - db
 volumes:
   currency_tracker_db:
     driver: local
