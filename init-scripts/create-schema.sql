@@ -1,0 +1,1 @@
+CREATE SCHEMA IF NOT EXISTS currency_tracker_schema;

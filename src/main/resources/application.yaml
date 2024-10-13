@@ -1,0 +1,41 @@
+server:
+  port: 8080
+  tomcat:
+    accesslog:
+      enabled: true
+      directory: /dev
+      prefix: stdout
+      buffered: false
+      suffix:
+      file-date-format:
+      pattern: "%{yyyy-MM-dd HH:mm:ss.sss}t DEBUG %u --- [%I] %h '%r' %s %b %D %F"
+  reactive:
+    session:
+      cookie:
+        same-site: none
+        secure: true
+
+logging:
+  level:
+    com.azure.spring.cloud.autoconfigure.aad.filter.UserPrincipalManager: WARN
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+    reactor.netty.http.client: INFO
+
+spring:
+  application:
+    name: crypto-stat-tracker
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://${POSTGRE_HOSTNAME:localhost}:${POSTGRE_PORT:5432}/${DB:currency_tracker_db}?currentSchema=currency_tracker_schema}
+    username: ${DB_USERNAME:user}
+    password: ${DB_PASSWORD:pass}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: ${SHOW_SQL:true}
+    properties:
+      hibernate:
+        format_sql: ${spring.jpa.show-sql}
+  webflux:
+    buffer-size: 100
+    read-timeout: 100

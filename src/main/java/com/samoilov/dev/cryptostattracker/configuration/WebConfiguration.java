@@ -37,7 +37,7 @@ public class WebConfiguration {
 
     @Bean
     public WebClient.Builder customWebClientBuilder(
-            @Value("${spring.cloud.azure.diversity.buffer-size}") int bufferSize,
+            @Value("${spring.webflux.buffer-size}") int bufferSize,
             @Value("${spring.webflux.read-timeout}") int requestTimeoutMillis) {
         ConnectionProvider connectionProvider = ConnectionProvider.builder(CONNECTION_PROVIDER_NAME)
                 .pendingAcquireTimeout(Duration.ofMillis(requestTimeoutMillis))
