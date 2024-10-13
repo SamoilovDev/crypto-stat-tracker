@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 
-@RequestMapping("/crypto-tracker/v1/currencies")
+@RequestMapping("/crypto-tracker-api/v1/currencies")
 public interface CryptoCurrencyApi {
 
     @GetMapping("/followed")

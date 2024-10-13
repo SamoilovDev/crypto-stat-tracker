@@ -23,7 +23,9 @@ public class CryptoCurrencyController implements CryptoCurrencyApi {
             Integer page,
             Integer size,
             UserEntity authorizedUser) {
-        return null;
+        return ResponseEntity.ok(cryptoCurrencyService.retrieveAllFollowedCryptoCurrencies(
+                page, size, authorizedUser
+        ));
     }
 
     @Override
@@ -31,7 +33,8 @@ public class CryptoCurrencyController implements CryptoCurrencyApi {
             String currencyCode,
             Integer checkingPeriod,
             UserEntity authorizedUser) {
-        return null;
+        cryptoCurrencyService.followCryptoCurrency(currencyCode, checkingPeriod, authorizedUser);
+        return ResponseEntity.noContent().build();
     }
 
     @Override
@@ -40,6 +43,8 @@ public class CryptoCurrencyController implements CryptoCurrencyApi {
             LocalDateTime startOfPeriod,
             LocalDateTime endOfPeriod,
             UserEntity authorizedUser) {
-        return null;
+        return ResponseEntity.ok(cryptoCurrencyService.retrieveCryptoCurrencyStatisticsForPeriod(
+                currencyCode, startOfPeriod, endOfPeriod, authorizedUser
+        ));
     }
 }

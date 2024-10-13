@@ -25,4 +25,7 @@ public class CryptoCurrencyDto extends BaseCryptoCurrencyDto {
     @JsonProperty("last_update_time")
     private LocalDateTime lastUpdateTime;
 
+    @JsonProperty("checking_period")
+    private Integer checkingPeriod;
+
 }

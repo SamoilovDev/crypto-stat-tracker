@@ -1,5 +1,6 @@
 package com.samoilov.dev.cryptostattracker.entity;
 
+import com.samoilov.dev.cryptostattracker.entity.base.BaseEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,7 +30,7 @@ import java.util.List;
         @Index(name = "pk_users_user_id", columnList = "user_id"),
         @Index(name = "idx_users_username", columnList = "username")
 })
-public class UserEntity implements UserDetails {
+public class UserEntity implements UserDetails, BaseEntity {
 
     @Id
     @Column(name = "user_id", nullable = false, unique = true)

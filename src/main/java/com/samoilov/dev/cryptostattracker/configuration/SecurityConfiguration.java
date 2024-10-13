@@ -18,12 +18,9 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
 
     private static final String[] PERMITTED_ALL_PATHS = {
-            "/login",
-            "/register",
-            "/api/v1/users/register",
-            "/api/v1/users/login",
+            "/crypto-tracker-api/v1/users/register",
+            "/crypto-tracker-api/v1/users/login",
             "/static/css/**",
-            "/api/v1/auth/**",
             "/v2/api-docs",
             "/v3/api-docs",
             "/v3/api-docs/**",

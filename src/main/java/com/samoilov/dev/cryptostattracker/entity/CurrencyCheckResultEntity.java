@@ -1,5 +1,6 @@
 package com.samoilov.dev.cryptostattracker.entity;
 
+import com.samoilov.dev.cryptostattracker.entity.base.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -29,7 +30,7 @@ import java.time.LocalDateTime;
         @Index(name = "pk_currency_check_results_check_result_id", columnList = "check_result_id"),
         @Index(name = "idx_currency_check_results_check_time", columnList = "check_time")
 })
-public class CurrencyCheckResultEntity {
+public class CurrencyCheckResultEntity implements BaseEntity {
 
     @Id
     @Column(name = "check_result_id", nullable = false, unique = true)
