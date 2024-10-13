@@ -1,5 +1,6 @@
 package com.samoilov.dev.cryptostattracker.configuration;
 
+import com.samoilov.dev.cryptostattracker.service.UserManagementService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -9,7 +10,6 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -19,7 +19,6 @@ public class SecurityConfiguration {
 
     private static final String[] PERMITTED_ALL_PATHS = {
             "/crypto-tracker-api/v1/users/register",
-            "/crypto-tracker-api/v1/users/login",
             "/static/css/**",
             "/v2/api-docs",
             "/v3/api-docs",
@@ -64,9 +63,9 @@ public class SecurityConfiguration {
     @Bean
     public AuthenticationProvider authenticationProvider(
             PasswordEncoder passwordEncoder,
-            UserDetailsService authService) {
+            UserManagementService userManagementService) {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(authService);
+        authenticationProvider.setUserDetailsService(userManagementService);
         authenticationProvider.setPasswordEncoder(passwordEncoder);
         return authenticationProvider;
     }
