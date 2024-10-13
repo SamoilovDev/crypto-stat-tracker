@@ -12,7 +12,8 @@ public interface CurrencyCheckResultRepository extends JpaRepository<CurrencyChe
 
     @Query("SELECT c FROM CurrencyCheckResultEntity c " +
             "WHERE c.cryptoCurrency.id = :cryptoCurrencyId " +
-            "ORDER BY c.checkTime DESC")
+            "ORDER BY c.checkTime DESC " +
+            "LIMIT 1")
     Optional<CurrencyCheckResultEntity> findLastCurrencyCheckResultEntityByCryptoCurrencyId(Long cryptoCurrencyId);
 
     List<CurrencyCheckResultEntity> findAllByCryptoCurrencyIdAndCheckTimeBetween(

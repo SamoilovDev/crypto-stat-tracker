@@ -7,6 +7,7 @@ import com.samoilov.dev.cryptostattracker.service.CoinGeckoRequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import reactor.core.scheduler.Schedulers;
 
 import java.time.LocalDateTime;
@@ -19,6 +20,7 @@ public class CryptoCurrencyCheckScheduler {
     private final CryptoCurrencyRepository cryptoCurrencyRepository;
     private final CoinGeckoRequestService coinGeckoRequestService;
 
+    @Transactional
     @Scheduled(cron = "0 * * * * *")
     public void checkCryptoCurrencies() {
         cryptoCurrencyRepository.findAllCurrenciesToCheck()

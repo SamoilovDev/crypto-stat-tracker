@@ -3,17 +3,11 @@ server:
   tomcat:
     accesslog:
       enabled: true
-      directory: /dev
       prefix: stdout
       buffered: false
       suffix:
       file-date-format:
       pattern: "%{yyyy-MM-dd HH:mm:ss.sss}t DEBUG %u --- [%I] %h '%r' %s %b %D %F"
-  reactive:
-    session:
-      cookie:
-        same-site: none
-        secure: true
 
 logging:
   level:

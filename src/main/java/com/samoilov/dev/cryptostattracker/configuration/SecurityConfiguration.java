@@ -19,16 +19,14 @@ public class SecurityConfiguration {
 
     private static final String[] PERMITTED_ALL_PATHS = {
             "/crypto-tracker-api/v1/users/register",
-            "/static/css/**",
             "/v2/api-docs",
             "/v3/api-docs",
             "/v3/api-docs/**",
             "/swagger-resources",
-            "/css/styles.css",
             "/swagger-resources/**",
             "/configuration/ui",
             "/configuration/security",
-            "/templates/swagger-ui/**",
+            "/swagger-ui/**",
             "/webjars/**",
             "/swagger-ui.html"
     };

@@ -17,8 +17,11 @@ public interface CryptoCurrencyRepository extends JpaRepository<CryptoCurrencyEn
             String currencyCode,
             Long cryptoCurrencySubscriberId);
 
-    @Query(value = "SELECT * FROM crypto_currencies c WHERE c.checking_period < " +
-            "EXTRACT(EPOCH FROM (NOW() - c.last_check_time)) / 60", nativeQuery = true)
+    boolean existsByCurrencyCodeAndCryptoCurrencySubscriberId(String currencyCode, Long cryptoCurrencySubscriberId);
+
+    @Query(value = "SELECT * FROM crypto_currencies c " +
+            "WHERE c.checking_period < EXTRACT(EPOCH FROM (NOW() - c.last_check_time)) / 60",
+            nativeQuery = true)
     List<CryptoCurrencyEntity> findAllCurrenciesToCheck();
 
 }

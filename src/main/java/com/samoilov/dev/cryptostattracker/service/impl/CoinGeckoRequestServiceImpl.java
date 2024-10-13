@@ -12,9 +12,10 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
+import java.util.Objects;
 
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Slf4j
 @Service
@@ -24,10 +25,10 @@ public class CoinGeckoRequestServiceImpl implements CoinGeckoRequestService {
 
     private static final String RESPONSE_EXCEPTION_LOG_TEMPLATE = "\nException occurred: {}\nHttpStatus: {}\nResponse body: {}";
     private static final String REQUEST_EXCEPTION_LOG_TEMPLATE = "Exception during request to {} with message: {}";
+    private static final String CURRENCY_NOT_FOUND = "Currency with %s code not found";
 
     private static final String VS_CURRENCY_QUERY_PARAM = "vs_currency";
     private static final String GECKO_COINS_PATH = "/coins/markets";
-    private static final String IDS_QUERY_PARAM = "ids";
     private static final String USD_VS_CURRENCY = "usd";
 
     private final WebClient coinGeckoWebClient;
@@ -37,13 +38,19 @@ public class CoinGeckoRequestServiceImpl implements CoinGeckoRequestService {
         return coinGeckoWebClient.get()
                 .uri(uriBuilder -> uriBuilder.path(GECKO_COINS_PATH)
                         .queryParam(VS_CURRENCY_QUERY_PARAM, USD_VS_CURRENCY)
-                        .queryParam(IDS_QUERY_PARAM, currencyCode.toLowerCase())
                         .build())
                 .retrieve()
                 .bodyToFlux(CryptoInfoResponseDto.class)
                 .collectList()
                 .transform(this::handleExceptions)
-                .map(List::getFirst);
+                .map(cryptoInfoResponseDtos -> cryptoInfoResponseDtos.stream()
+                        .filter(cryptoInfoResponseDto -> Objects.equals(
+                                cryptoInfoResponseDto.getSymbol(), currencyCode.toLowerCase()
+                        ))
+                        .findFirst()
+                        .orElseThrow(() -> new ResponseStatusException(
+                                NOT_FOUND, CURRENCY_NOT_FOUND.formatted(currencyCode)
+                        )));
     }
 
     private <T> Mono<T> handleExceptions(Mono<T> mono) {

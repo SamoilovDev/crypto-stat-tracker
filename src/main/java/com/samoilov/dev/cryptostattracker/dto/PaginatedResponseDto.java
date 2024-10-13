@@ -18,7 +18,7 @@ public class PaginatedResponseDto<T extends Serializable> implements Serializabl
 
     private int size;
 
-    private int total;
+    private long total;
 
     private List<T> data;
 
