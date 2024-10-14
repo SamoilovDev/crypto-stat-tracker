@@ -32,7 +32,6 @@ public class CryptoCurrencyMapper implements Mapper<CryptoCurrencyEntity, Crypto
 
     @Override
     public PaginatedResponseDto<CryptoCurrencyDto> mapToPaginatedDto(Page<CryptoCurrencyEntity> entityPage) {
-
         return PaginatedResponseDto.<CryptoCurrencyDto>builder()
                 .size(entityPage.getSize())
                 .page(entityPage.getNumber() + 1)
